@@ -99,7 +99,7 @@ int main(void)
   MX_ADC1_Init();
   /* USER CODE BEGIN 2 */
 
-  if(HAL_ADC_Start_IT(&hadc1) != HAL_OK)
+  if(HAL_ADC_Start_IT(&hadc1) != HAL_OK) //ADC 변환 시작
   {
 	  Error_Handler();
   }
@@ -109,8 +109,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  Vin = ADC_Value * (3.3/4096) * 1000;
-	  temp = (Vin - 500)/10;
+	  Vin = ADC_Value * (3.3/4096) * 1000; //AD 변환된 디지털 값
+	  temp = (Vin - 500)/10; //온도센서 온도값
 	  printf ("TEMP=%4f\r\n", temp);
 	  HAL_Delay (100);
 
@@ -278,9 +278,9 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc) //ADC 인터럽트 콜백 함수
 {
-	temp = HAL_ADC_GetValue(&hadc1);
+	temp = HAL_ADC_GetValue(&hadc1); 
 }
 /* USER CODE END 4 */
 
